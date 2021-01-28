@@ -22,6 +22,7 @@ Component({
         },
         /**
          * 当前页码
+         * -1:代表下拉刷新
          */
         current: {
             type: Number,
@@ -76,7 +77,20 @@ Component({
             }
             if (isLoad) {
                 this.showLoading();
-                this.triggerEvent("change", { current: current, pageSize: pageSize, total: total });
+                let options = {
+                    current: current,
+                    pageSize: pageSize,
+                    total: total,
+                };
+                if (current == 1 && total == 0) {
+                    /**
+                     * 增加回调函数，用以标记是否为刷新
+                     */
+                    options.callback = () => {
+                        wx.stopPullDownRefresh();
+                    };
+                }
+                this.triggerEvent("change", options);
             } else {
                 this.hideLoading();
             }

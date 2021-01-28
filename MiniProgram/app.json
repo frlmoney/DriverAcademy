@@ -30,8 +30,13 @@
         "van-picker": "@vant/weapp/picker/index",
         "van-tree-select": "@vant/weapp/tree-select/index",
         "van-loading": "@vant/weapp/loading/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-tabbar": "@vant/weapp/tabbar/index",
+        "van-tabbar-item": "@vant/weapp/tabbar-item/index",
         "van-divider": "@vant/weapp/divider/index",
         "van-empty": "@vant/weapp/empty/index",
+        "van-sticky": "@vant/weapp/sticky/index",
         "frl-pagination": "./components/pagination/index",
         "frl-pagination-item": "./components/pagination-item/index"
     },

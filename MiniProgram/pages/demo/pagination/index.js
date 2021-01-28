@@ -17,46 +17,48 @@ Page({
     onLoad: function (options) {
         this.getPaginationData();
     },
-    getPaginationData() {
+
+    /**
+     * 后台请求数据方法
+     * @param {*} detail
+     */
+    getPaginationData(detail) {
         console.log(this.data.current);
         request(api.getUserList, this.data).then((res) => {
-            const concatList = [...this.data.list, ...res.data.list];
+            let concatList = [];
+            if (detail && detail.callback) {
+                detail.callback();
+                concatList = res.data.list;
+            } else {
+                concatList = [...this.data.list, ...res.data.list];
+            }
             this.setData({
                 list: concatList,
                 total: res.data.total,
             });
-            console.log(concatList);
+            // console.log(concatList);
         });
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {},
 
+    /**
+     * 监听分页组件
+     * @param {*} event
+     */
     onPaginationChange(event) {
-        // console.log(event.detail);
-        this.getPaginationData();
+        this.getPaginationData(event.detail);
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {},
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {},
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {},
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
+     * 开启该功能需要在【页面配置】.json中配置：
+     * "enablePullDownRefresh":true
      */
-    onPullDownRefresh: function () {},
+    onPullDownRefresh: function () {
+        this.setData({
+            current: 1,
+            total: 0,
+        });
+    },
 
     /**
      * 页面上拉触底事件的处理函数
@@ -67,9 +69,4 @@ Page({
             current: this.data.current + 1,
         });
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {},
 });
