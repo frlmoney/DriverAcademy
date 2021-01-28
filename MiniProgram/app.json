@@ -1,0 +1,39 @@
+{
+    "pages": [
+        "pages/demo/pagination/index",
+        "pages/index/index",
+        "pages/logs/logs"
+        
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "Driver Academy By LaFerrari",
+        "navigationBarTextStyle": "black"
+    },
+    "usingComponents": {
+        "van-row": "@vant/weapp/row",
+        "van-col": "@vant/weapp/col",
+        "van-grid": "@vant/weapp/grid/index",
+        "van-grid-item": "@vant/weapp/grid-item/index",
+        "van-action-sheet": "@vant/weapp/action-sheet",
+        "van-checkbox": "@vant/weapp/checkbox/index",
+        "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+        "van-radio": "@vant/weapp/radio/index",
+        "van-radio-group": "@vant/weapp/radio-group/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-calendar": "@vant/weapp/calendar/index",
+        "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-toast": "@vant/weapp/toast/index",
+        "van-picker": "@vant/weapp/picker/index",
+        "van-tree-select": "@vant/weapp/tree-select/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-empty": "@vant/weapp/empty/index",
+        "frl-pagination": "./components/pagination/index",
+        "frl-pagination-item": "./components/pagination-item/index"
+    },
+    "sitemapLocation": "sitemap.json"
+}

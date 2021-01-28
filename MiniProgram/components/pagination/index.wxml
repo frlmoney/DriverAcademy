@@ -1,0 +1,13 @@
+<view>
+    <slot />
+</view>
+<view wx:if="{{loading}}" style="text-align:center;padding:50rpx 0;">
+    <van-loading type="spinner" size="18px">加载中...</van-loading>
+</view>
+<view wx:if="{{endStatus}}" style="text-align:center;padding:0 25rpx;">
+    <van-divider contentPosition="center">您已经到底了</van-divider>
+</view>
+<!-- <frl-pagination-item wx:for="{{test}}" wx:key="index">
+    <slot value="{{item}}"></slot>
+    <view>{{item}}</view>
+</frl-pagination-item> -->
