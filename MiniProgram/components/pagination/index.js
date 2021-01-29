@@ -86,7 +86,7 @@ Component({
                         pageSize: pageSize,
                         total: total,
                     };
-                    if (current == 1 && total == 0) {
+                    if (current == 1) {
                         /**
                          * 增加回调函数，用以标记是否为刷新
                          */
