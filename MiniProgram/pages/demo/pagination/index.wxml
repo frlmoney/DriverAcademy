@@ -1,4 +1,4 @@
-<frl-pagination current="{{current}}" page-size="{{pageSize}}" total="{{total}}" bind:change="onPaginationChange">
+<frl-pagination current="{{listQuery.current}}" page-size="{{listQuery.pageSize}}" total="{{total}}" bind:change="onPaginationChange">
     <!-- <frl-pagination-item wx:for="{{list}}" wx:key="index">{{item.name}}</frl-pagination-item> -->
     <van-cell wx:for="{{list}}" wx:key="index" title="{{item.name}}" is-link value="{{item.date}}" />
 </frl-pagination>

@@ -70,8 +70,9 @@ Component({
         updateCurrent() {
             const { current, pageSize, total, endCurrent, prevCurrent } = this.data;
             let isLoad = current == 1 ? true : false;
-            if (prevCurrent != current) {
-                this.setPrevCurrent(current);
+            if (prevCurrent == current && prevCurrent == 1) {
+                wx.stopPullDownRefresh();
+            } else {
                 if (total > 0) {
                     this.updateEndCurrent();
                     if ((endCurrent > 0 && current <= endCurrent) || current == 2) {
@@ -97,8 +98,7 @@ Component({
                 } else {
                     this.hideLoading();
                 }
-            } else {
-                wx.stopPullDownRefresh();
+                this.setPrevCurrent(current);
             }
         },
         setPrevCurrent(prevCurrent) {

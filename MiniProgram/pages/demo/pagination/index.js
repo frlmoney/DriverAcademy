@@ -7,8 +7,10 @@ Page({
     data: {
         list: [],
         total: 0,
-        current: 1,
-        pageSize: 20,
+        listQuery: {
+            current: 1,
+            pageSize: 20, // 可以不设置 默认10
+        },
     },
 
     /**
@@ -23,8 +25,9 @@ Page({
      * @param {*} detail
      */
     getPaginationData(detail) {
-        console.log(this.data.current);
-        request(api.getUserList, this.data).then((res) => {
+        let { listQuery } = this.data;
+        console.log(listQuery.current);
+        request(api.getUserList, listQuery).then((res) => {
             let concatList = [];
             if (detail && detail.callback) {
                 detail.callback();
@@ -54,8 +57,10 @@ Page({
      * "enablePullDownRefresh":true
      */
     onPullDownRefresh: function () {
+        let listQuery = this.data.listQuery;
+        listQuery.current = 1;
         this.setData({
-            current: 1,
+            listQuery: listQuery,
             total: 0,
         });
     },
@@ -65,8 +70,10 @@ Page({
      * 分页必备函数
      */
     onReachBottom: function () {
+        let listQuery = this.data.listQuery;
+        listQuery.current++;
         this.setData({
-            current: this.data.current + 1,
+            listQuery: listQuery,
         });
     },
 });
