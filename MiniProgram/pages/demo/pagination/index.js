@@ -61,7 +61,6 @@ Page({
         listQuery.current = 1;
         this.setData({
             listQuery: listQuery,
-            total: 0,
         });
     },
 
