@@ -45,6 +45,7 @@ Component({
     data: {
         loading: false,
         endStatus: false,
+        prevCurrent: 1, // 上一页页码，用于与当前页对比，防止重复下来刷新
         endCurrent: 0, // 结束页码
     },
     /**
@@ -67,33 +68,43 @@ Component({
      */
     methods: {
         updateCurrent() {
-            const { current, pageSize, total, endCurrent } = this.data;
+            const { current, pageSize, total, endCurrent, prevCurrent } = this.data;
             let isLoad = current == 1 ? true : false;
-            if (total > 0) {
-                this.updateEndCurrent();
-                if ((endCurrent > 0 && current <= endCurrent) || current == 2) {
-                    isLoad = true;
+            if (prevCurrent != current) {
+                this.setPrevCurrent(current);
+                if (total > 0) {
+                    this.updateEndCurrent();
+                    if ((endCurrent > 0 && current <= endCurrent) || current == 2) {
+                        isLoad = true;
+                    }
                 }
-            }
-            if (isLoad) {
-                this.showLoading();
-                let options = {
-                    current: current,
-                    pageSize: pageSize,
-                    total: total,
-                };
-                if (current == 1 && total == 0) {
-                    /**
-                     * 增加回调函数，用以标记是否为刷新
-                     */
-                    options.callback = () => {
-                        wx.stopPullDownRefresh();
+                if (isLoad) {
+                    this.showLoading();
+                    let options = {
+                        current: current,
+                        pageSize: pageSize,
+                        total: total,
                     };
+                    if (current == 1 && total == 0) {
+                        /**
+                         * 增加回调函数，用以标记是否为刷新
+                         */
+                        options.callback = () => {
+                            wx.stopPullDownRefresh();
+                        };
+                    }
+                    this.triggerEvent("change", options);
+                } else {
+                    this.hideLoading();
                 }
-                this.triggerEvent("change", options);
             } else {
-                this.hideLoading();
+                wx.stopPullDownRefresh();
             }
+        },
+        setPrevCurrent(prevCurrent) {
+            this.setData({
+                prevCurrent: prevCurrent,
+            });
         },
         showLoading() {
             this.setData({ loading: true, endStatus: false });
